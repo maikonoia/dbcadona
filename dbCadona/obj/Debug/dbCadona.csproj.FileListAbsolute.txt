@@ -1,0 +1,10 @@
+C:\Users\Navalha\source\repos\dbCadona\dbCadona\bin\Debug\dbCadona.exe.config
+C:\Users\Navalha\source\repos\dbCadona\dbCadona\bin\Debug\dbCadona.exe
+C:\Users\Navalha\source\repos\dbCadona\dbCadona\bin\Debug\dbCadona.pdb
+C:\Users\Navalha\source\repos\dbCadona\dbCadona\obj\Debug\dbCadona.csprojAssemblyReference.cache
+C:\Users\Navalha\source\repos\dbCadona\dbCadona\obj\Debug\dbCadona.Form1.resources
+C:\Users\Navalha\source\repos\dbCadona\dbCadona\obj\Debug\dbCadona.Properties.Resources.resources
+C:\Users\Navalha\source\repos\dbCadona\dbCadona\obj\Debug\dbCadona.csproj.GenerateResource.cache
+C:\Users\Navalha\source\repos\dbCadona\dbCadona\obj\Debug\dbCadona.csproj.CoreCompileInputs.cache
+C:\Users\Navalha\source\repos\dbCadona\dbCadona\obj\Debug\dbCadona.exe
+C:\Users\Navalha\source\repos\dbCadona\dbCadona\obj\Debug\dbCadona.pdb
