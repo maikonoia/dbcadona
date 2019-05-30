@@ -37,25 +37,31 @@
             this.codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnInserir = new System.Windows.Forms.Button();
-            this.txtCod = new System.Windows.Forms.TextBox();
-            this.txtName = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.btnActions = new System.Windows.Forms.Button();
             this.btnDeletar = new System.Windows.Forms.Button();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtCod = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnCommit = new System.Windows.Forms.Button();
+            this.btnRollback = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTransactions
             // 
             this.lblTransactions.AutoSize = true;
-            this.lblTransactions.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTransactions.Location = new System.Drawing.Point(30, 28);
+            this.lblTransactions.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTransactions.Location = new System.Drawing.Point(243, 9);
             this.lblTransactions.Name = "lblTransactions";
-            this.lblTransactions.Size = new System.Drawing.Size(219, 37);
+            this.lblTransactions.Size = new System.Drawing.Size(143, 29);
             this.lblTransactions.TabIndex = 5;
-            this.lblTransactions.Text = "Transação = ";
+            this.lblTransactions.Text = "Transação ";
+            this.lblTransactions.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // dataGridView1
             // 
@@ -66,7 +72,7 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Código,
             this.Nome});
-            this.dataGridView1.Location = new System.Drawing.Point(24, 88);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 49);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(300, 173);
@@ -89,13 +95,16 @@
             // 
             // dataGridView2
             // 
+            this.dataGridView2.AllowUserToAddRows = false;
+            this.dataGridView2.AllowUserToDeleteRows = false;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.operacao,
             this.codigo,
             this.name});
-            this.dataGridView2.Location = new System.Drawing.Point(330, 88);
+            this.dataGridView2.Location = new System.Drawing.Point(318, 49);
             this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.ReadOnly = true;
             this.dataGridView2.Size = new System.Drawing.Size(344, 173);
             this.dataGridView2.TabIndex = 7;
             // 
@@ -103,20 +112,23 @@
             // 
             this.operacao.HeaderText = "Operação";
             this.operacao.Name = "operacao";
+            this.operacao.ReadOnly = true;
             // 
             // codigo
             // 
             this.codigo.HeaderText = "Código";
             this.codigo.Name = "codigo";
+            this.codigo.ReadOnly = true;
             // 
             // name
             // 
             this.name.HeaderText = "Nome";
             this.name.Name = "name";
+            this.name.ReadOnly = true;
             // 
             // btnInserir
             // 
-            this.btnInserir.Location = new System.Drawing.Point(24, 302);
+            this.btnInserir.Location = new System.Drawing.Point(12, 239);
             this.btnInserir.Name = "btnInserir";
             this.btnInserir.Size = new System.Drawing.Size(300, 45);
             this.btnInserir.TabIndex = 8;
@@ -124,47 +136,9 @@
             this.btnInserir.UseVisualStyleBackColor = true;
             this.btnInserir.Click += new System.EventHandler(this.btnInserir_Click);
             // 
-            // txtCod
-            // 
-            this.txtCod.Location = new System.Drawing.Point(495, 319);
-            this.txtCod.Name = "txtCod";
-            this.txtCod.Size = new System.Drawing.Size(100, 20);
-            this.txtCod.TabIndex = 9;
-            this.txtCod.Visible = false;
-            // 
-            // txtName
-            // 
-            this.txtName.Location = new System.Drawing.Point(495, 358);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(100, 20);
-            this.txtName.TabIndex = 10;
-            this.txtName.Visible = false;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(400, 316);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 16);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "Código";
-            this.label1.Visible = false;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(400, 362);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 16);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "Nome";
-            this.label2.Visible = false;
-            // 
             // btnActions
             // 
-            this.btnActions.Location = new System.Drawing.Point(403, 411);
+            this.btnActions.Location = new System.Drawing.Point(89, 77);
             this.btnActions.Name = "btnActions";
             this.btnActions.Size = new System.Drawing.Size(75, 23);
             this.btnActions.TabIndex = 13;
@@ -175,35 +149,117 @@
             // 
             // btnDeletar
             // 
-            this.btnDeletar.Location = new System.Drawing.Point(520, 411);
+            this.btnDeletar.Location = new System.Drawing.Point(170, 77);
             this.btnDeletar.Name = "btnDeletar";
-            this.btnDeletar.Size = new System.Drawing.Size(75, 23);
+            this.btnDeletar.Size = new System.Drawing.Size(113, 23);
             this.btnDeletar.TabIndex = 14;
             this.btnDeletar.Text = "Deletar";
             this.btnDeletar.UseVisualStyleBackColor = true;
             this.btnDeletar.Visible = false;
+            this.btnDeletar.Click += new System.EventHandler(this.btnDeletar_Click);
+            // 
+            // txtName
+            // 
+            this.txtName.Location = new System.Drawing.Point(77, 42);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(206, 20);
+            this.txtName.TabIndex = 10;
+            this.txtName.Visible = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(13, 43);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(53, 16);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Nome:";
+            this.label2.Visible = false;
+            // 
+            // txtCod
+            // 
+            this.txtCod.Location = new System.Drawing.Point(77, 14);
+            this.txtCod.Name = "txtCod";
+            this.txtCod.Size = new System.Drawing.Size(68, 20);
+            this.txtCod.TabIndex = 9;
+            this.txtCod.Visible = false;
+            this.txtCod.TextChanged += new System.EventHandler(this.txtCod_TextChanged);
+            this.txtCod.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCod_KeyPress);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(13, 14);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(62, 16);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Código:";
+            this.label1.Visible = false;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.btnDeletar);
+            this.panel1.Controls.Add(this.txtCod);
+            this.panel1.Controls.Add(this.btnActions);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.txtName);
+            this.panel1.Location = new System.Drawing.Point(12, 305);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(300, 112);
+            this.panel1.TabIndex = 15;
+            // 
+            // btnCommit
+            // 
+            this.btnCommit.Location = new System.Drawing.Point(318, 239);
+            this.btnCommit.Name = "btnCommit";
+            this.btnCommit.Size = new System.Drawing.Size(166, 45);
+            this.btnCommit.TabIndex = 16;
+            this.btnCommit.Text = "Commit";
+            this.btnCommit.UseVisualStyleBackColor = true;
+            // 
+            // btnRollback
+            // 
+            this.btnRollback.Location = new System.Drawing.Point(490, 239);
+            this.btnRollback.Name = "btnRollback";
+            this.btnRollback.Size = new System.Drawing.Size(172, 45);
+            this.btnRollback.TabIndex = 17;
+            this.btnRollback.Text = "Rollback";
+            this.btnRollback.UseVisualStyleBackColor = true;
+            // 
+            // panel2
+            // 
+            this.panel2.Location = new System.Drawing.Point(319, 305);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(343, 112);
+            this.panel2.TabIndex = 18;
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Info;
-            this.ClientSize = new System.Drawing.Size(749, 538);
-            this.Controls.Add(this.btnDeletar);
-            this.Controls.Add(this.btnActions);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtName);
-            this.Controls.Add(this.txtCod);
+            this.ClientSize = new System.Drawing.Size(673, 429);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.btnRollback);
+            this.Controls.Add(this.btnCommit);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnInserir);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.lblTransactions);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Form2";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form2";
             this.Load += new System.EventHandler(this.Form2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -212,18 +268,22 @@
         #endregion
         private System.Windows.Forms.Label lblTransactions;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Código;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nome;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.DataGridViewTextBoxColumn operacao;
         private System.Windows.Forms.DataGridViewTextBoxColumn codigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.Button btnInserir;
-        private System.Windows.Forms.TextBox txtCod;
-        private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnActions;
         private System.Windows.Forms.Button btnDeletar;
+        private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtCod;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Código;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nome;
+        private System.Windows.Forms.Button btnCommit;
+        private System.Windows.Forms.Button btnRollback;
+        private System.Windows.Forms.Panel panel2;
     }
 }

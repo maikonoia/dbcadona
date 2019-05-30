@@ -34,6 +34,8 @@ namespace dbCadona
             //}
 
             InitializeComponent();
+
+            this.Text = string.Format("Transação {0}", contTransactions);
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -100,7 +102,32 @@ namespace dbCadona
                 //}
             }
 
-           // File.AppendAllText(string.Format(@"C:\dev\transacao{0}.txt", contTransactions), txtCod.Text + "-" + txtName.Text + "-" +  op +  ";\r\n");
+            dataGridView2.Rows.Add(op, txtCod.Text, txtName.Text);
+
+            File.AppendAllText(string.Format(@"C:\dev\transacao{0}.txt", contTransactions), txtCod.Text + "-" + txtName.Text + "-" +  op +  ";\r\n");
+        }
+
+        private void btnDeletar_Click(object sender, EventArgs e)
+        {
+            op = "REMOVER";
+            File.AppendAllText(string.Format(@"C:\dev\transacao{0}.txt", contTransactions), txtCod.Text + "-" + txtName.Text + "-" + op + ";\r\n");
+            dataGridView2.Rows.Add(op, txtCod.Text, txtName.Text);
+        }
+
+        private void txtCod_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(txtCod.Text, "  ^ [0-9]"))
+            {
+                txtCod.Text = "";
+            }
+        }
+
+        private void txtCod_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

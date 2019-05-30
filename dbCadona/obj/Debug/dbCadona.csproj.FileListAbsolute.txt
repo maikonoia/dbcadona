@@ -19,3 +19,4 @@ C:\dev\cadodeus\dbcadona\dbCadona\obj\Debug\dbCadona.csproj.GenerateResource.cac
 C:\dev\cadodeus\dbcadona\dbCadona\obj\Debug\dbCadona.csproj.CoreCompileInputs.cache
 C:\dev\cadodeus\dbcadona\dbCadona\obj\Debug\dbCadona.exe
 C:\dev\cadodeus\dbcadona\dbCadona\obj\Debug\dbCadona.pdb
+C:\Users\Navalha\source\repos\dbCadona\dbCadona\obj\Debug\dbCadona.Form2.resources
