@@ -47,9 +47,14 @@
             this.btnCommit = new System.Windows.Forms.Button();
             this.btnRollback = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lblAlert = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTransactions
@@ -73,6 +78,7 @@
             this.Código,
             this.Nome});
             this.dataGridView1.Location = new System.Drawing.Point(12, 49);
+            this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(300, 173);
@@ -103,16 +109,20 @@
             this.codigo,
             this.name});
             this.dataGridView2.Location = new System.Drawing.Point(318, 49);
+            this.dataGridView2.MultiSelect = false;
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
+            this.dataGridView2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridView2.Size = new System.Drawing.Size(344, 173);
             this.dataGridView2.TabIndex = 7;
             // 
             // operacao
             // 
+            this.operacao.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.operacao.HeaderText = "Operação";
             this.operacao.Name = "operacao";
             this.operacao.ReadOnly = true;
+            this.operacao.Width = 79;
             // 
             // codigo
             // 
@@ -219,6 +229,7 @@
             this.btnCommit.TabIndex = 16;
             this.btnCommit.Text = "Commit";
             this.btnCommit.UseVisualStyleBackColor = true;
+            this.btnCommit.Click += new System.EventHandler(this.btnCommit_Click);
             // 
             // btnRollback
             // 
@@ -228,13 +239,42 @@
             this.btnRollback.TabIndex = 17;
             this.btnRollback.Text = "Rollback";
             this.btnRollback.UseVisualStyleBackColor = true;
+            this.btnRollback.Click += new System.EventHandler(this.btnRollback_Click);
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.lblAlert);
             this.panel2.Location = new System.Drawing.Point(319, 305);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(343, 112);
+            this.panel2.Size = new System.Drawing.Size(343, 34);
             this.panel2.TabIndex = 18;
+            // 
+            // lblAlert
+            // 
+            this.lblAlert.AutoSize = true;
+            this.lblAlert.Location = new System.Drawing.Point(11, 11);
+            this.lblAlert.Name = "lblAlert";
+            this.lblAlert.Size = new System.Drawing.Size(124, 13);
+            this.lblAlert.TabIndex = 0;
+            this.lblAlert.Text = "Aguardando Operação...";
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.label3);
+            this.panel3.Location = new System.Drawing.Point(319, 348);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(343, 69);
+            this.panel3.TabIndex = 19;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(11, 15);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(297, 39);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "OBS:\r\nPara alterar e/ou editar um item dê 2 cliques na lista.\r\nPressione COMMIT o" +
+    "u ROLLBACK para finalizar a transação.";
             // 
             // Form2
             // 
@@ -242,6 +282,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Info;
             this.ClientSize = new System.Drawing.Size(673, 429);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.btnRollback);
             this.Controls.Add(this.btnCommit);
@@ -260,6 +301,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -269,9 +314,6 @@
         private System.Windows.Forms.Label lblTransactions;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn operacao;
-        private System.Windows.Forms.DataGridViewTextBoxColumn codigo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.Button btnInserir;
         private System.Windows.Forms.Button btnActions;
         private System.Windows.Forms.Button btnDeletar;
@@ -285,5 +327,11 @@
         private System.Windows.Forms.Button btnCommit;
         private System.Windows.Forms.Button btnRollback;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label lblAlert;
+        private System.Windows.Forms.DataGridViewTextBoxColumn operacao;
+        private System.Windows.Forms.DataGridViewTextBoxColumn codigo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn name;
+        private System.Windows.Forms.Label label3;
     }
 }

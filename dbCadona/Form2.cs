@@ -21,6 +21,7 @@ namespace dbCadona
         public Form2(int contTransactions)
         {
             this.contTransactions = contTransactions;
+            this.ControlBox = false;
 
             //if (crudMode == "INSERT" )
             //{
@@ -81,6 +82,12 @@ namespace dbCadona
 
         private void btnActions_Click(object sender, EventArgs e)
         {
+            if (txtCod.Text == "" || txtName.Text == "")
+            {
+                MessageBox.Show("Os campos Código e Nome precisam ser preenchidos.");
+                return;
+            }
+
             if (op == "ALTERAR")
             {
                 var lines = System.IO.File.ReadAllLines(@"C:\dev\teste.txt");
@@ -105,13 +112,22 @@ namespace dbCadona
             dataGridView2.Rows.Add(op, txtCod.Text, txtName.Text);
 
             File.AppendAllText(string.Format(@"C:\dev\transacao{0}.txt", contTransactions), txtCod.Text + "-" + txtName.Text + "-" +  op +  ";\r\n");
+
+            DisplayAlert(string.Format("Operação {0} efetuada.", op));
         }
 
         private void btnDeletar_Click(object sender, EventArgs e)
         {
-            op = "REMOVER";
+            if (txtCod.Text == "")
+            {
+                MessageBox.Show("O campo Código precisa estar preenchido.");
+                return;
+            }
+
             File.AppendAllText(string.Format(@"C:\dev\transacao{0}.txt", contTransactions), txtCod.Text + "-" + txtName.Text + "-" + op + ";\r\n");
-            dataGridView2.Rows.Add(op, txtCod.Text, txtName.Text);
+            dataGridView2.Rows.Add("REMOVER", txtCod.Text, dataGridView1.SelectedCells[0].Value.ToString());
+
+            DisplayAlert("Operação REMOVER efetuada.");
         }
 
         private void txtCod_TextChanged(object sender, EventArgs e)
@@ -128,6 +144,30 @@ namespace dbCadona
             {
                 e.Handled = true;
             }
+        }
+
+        private void DisplayAlert(String message, int Interval = 3000)
+        {
+            var timer = new Timer();
+            timer.Interval = Interval;
+            lblAlert.Text = message;
+
+            timer.Tick += (s, en) => {
+                lblAlert.Text = "Aguardando nova Operação...";
+                timer.Stop();
+            };
+
+            timer.Start();
+        }
+
+        private void btnCommit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnRollback_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
