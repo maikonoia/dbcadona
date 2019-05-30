@@ -54,8 +54,8 @@ namespace dbCadona
             btnActions.Text = "Alterar";
             btnDeletar.Visible = true;
             
-            txtCod.Text = dataGridView1.SelectedCells[0].Value.ToString();
-            txtName.Text = dataGridView1.SelectedCells[1].Value.ToString();
+            txtCod.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+            txtName.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
         }
 
         private void btnInserir_Click(object sender, EventArgs e)
@@ -104,6 +104,8 @@ namespace dbCadona
                     }
                 }
 
+                new DbLog("TRANSACAO " + contTransactions + " " + op + " CÓD " + dataGridView1.SelectedCells[0].Value.ToString());
+
                 File.AppendAllText(string.Format(@"C:\dev\transacoes\transacao{0}.txt", contTransactions), op + "|" + txtCod.Text + "|" + txtName.Text + ";\r\n");
             }
 
@@ -129,6 +131,8 @@ namespace dbCadona
                     }
                 }
 
+                new DbLog("TRANSACAO " + contTransactions + " " + op +" CÓD " + dataGridView1.SelectedCells[0].Value.ToString());
+
                 File.AppendAllText(string.Format(@"C:\dev\transacoes\transacao{0}.txt", contTransactions), op + "|" + dataGridView1.SelectedCells[0].Value.ToString() + "|" + txtCod.Text + "|" + txtName.Text + ";\r\n");
             }
 
@@ -144,6 +148,8 @@ namespace dbCadona
                 MessageBox.Show("O campo Código precisa estar preenchido.");
                 return;
             }
+
+            new DbLog("TRANSACAO " + contTransactions + " REMOVER CÓD " + dataGridView1.SelectedCells[0].Value.ToString());
 
             File.AppendAllText(string.Format(@"C:\dev\transacoes\transacao{0}.txt", contTransactions), "REMOVER|" + txtCod.Text + "|" + txtName.Text + ";\r\n");
             dataGridView2.Rows.Add("REMOVER", txtCod.Text, dataGridView1.SelectedCells[0].Value.ToString());
@@ -183,13 +189,15 @@ namespace dbCadona
 
         private void btnCommit_Click(object sender, EventArgs e)
         {
+            new DbLog("TRANSACAO " + contTransactions + " COMMIT");
+
             File.AppendAllText(string.Format(@"C:\dev\transacoes\transacao{0}.txt", contTransactions), "END|TRANSACAO" + contTransactions + "|COMMIT");
             this.Close();
         }
 
         private void btnRollback_Click(object sender, EventArgs e)
         {
-            new DbLog("TESTE");
+            new DbLog("TRANSACAO " + contTransactions + " ROLLBACK");
 
             File.AppendAllText(string.Format(@"C:\dev\transacoes\transacao{0}.txt", contTransactions), "END|TRANSACAO" + contTransactions + "|ROLLBACK");
             this.Close();

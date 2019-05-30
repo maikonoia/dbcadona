@@ -112,11 +112,11 @@
             // 
             this.lblTransactions.AutoSize = true;
             this.lblTransactions.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTransactions.Location = new System.Drawing.Point(275, 9);
+            this.lblTransactions.Location = new System.Drawing.Point(172, 21);
             this.lblTransactions.Name = "lblTransactions";
-            this.lblTransactions.Size = new System.Drawing.Size(143, 29);
+            this.lblTransactions.Size = new System.Drawing.Size(335, 29);
             this.lblTransactions.TabIndex = 9;
-            this.lblTransactions.Text = "Transação ";
+            this.lblTransactions.Text = "RECUPERAÇÃO DE FALHA";
             this.lblTransactions.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnUndo
@@ -148,6 +148,8 @@
             this.Controls.Add(this.lblTransactions);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.dataGridView1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Form3";
             this.Text = "Recuperação de falha";
             this.Load += new System.EventHandler(this.Form3_Load);

@@ -40,9 +40,10 @@ namespace dbCadona
                 processBreakFile(fileName);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnNewTransaction_Click(object sender, EventArgs e)
         {
             contTransactions++;
+            new DbLog("TRANSACAO " + contTransactions + " INICIADA");
             Form2 newForm = new Form2(contTransactions);
             newForm.Show();
         }
@@ -65,7 +66,7 @@ namespace dbCadona
             if (lastLine[0] != "END")
             {
                 Form3 newForm = new Form3(path);
-                newForm.Show();
+                newForm.ShowDialog();
             }
         }
         
@@ -82,7 +83,9 @@ namespace dbCadona
                 {
                     
                     return;
-                } else {
+                }
+                else
+                {
                     File.Delete(path);
                     return;
                 }

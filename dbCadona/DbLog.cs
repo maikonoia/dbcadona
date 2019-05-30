@@ -15,8 +15,10 @@ namespace dbCadona
         {
             try
             {
-                StreamWriter w = File.AppendText(@"C:/dev/logs/log.txt");
-                AddToLog(logMessage, w);
+                using (StreamWriter w = File.AppendText(@"C:/dev/logs/log.txt"))
+                {
+                    AddToLog(logMessage, w);
+                }
             }
             catch (Exception ex)
             {
@@ -27,7 +29,7 @@ namespace dbCadona
         {
             try
             {
-                txtWriter.Write("\r\nLog : ");
+                txtWriter.Write("\r\nLog gerado : ");
                 txtWriter.WriteLine("{0} {1}", DateTime.Now.ToLongTimeString(),
                     DateTime.Now.ToLongDateString());
                 txtWriter.WriteLine("  :");
