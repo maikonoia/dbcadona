@@ -8,3 +8,14 @@ C:\Users\Navalha\source\repos\dbCadona\dbCadona\obj\Debug\dbCadona.csproj.Genera
 C:\Users\Navalha\source\repos\dbCadona\dbCadona\obj\Debug\dbCadona.csproj.CoreCompileInputs.cache
 C:\Users\Navalha\source\repos\dbCadona\dbCadona\obj\Debug\dbCadona.exe
 C:\Users\Navalha\source\repos\dbCadona\dbCadona\obj\Debug\dbCadona.pdb
+C:\dev\cadodeus\dbcadona\dbCadona\bin\Debug\dbCadona.exe.config
+C:\dev\cadodeus\dbcadona\dbCadona\bin\Debug\dbCadona.exe
+C:\dev\cadodeus\dbcadona\dbCadona\bin\Debug\dbCadona.pdb
+C:\dev\cadodeus\dbcadona\dbCadona\obj\Debug\dbCadona.csprojAssemblyReference.cache
+C:\dev\cadodeus\dbcadona\dbCadona\obj\Debug\dbCadona.Form1.resources
+C:\dev\cadodeus\dbcadona\dbCadona\obj\Debug\dbCadona.Form2.resources
+C:\dev\cadodeus\dbcadona\dbCadona\obj\Debug\dbCadona.Properties.Resources.resources
+C:\dev\cadodeus\dbcadona\dbCadona\obj\Debug\dbCadona.csproj.GenerateResource.cache
+C:\dev\cadodeus\dbcadona\dbCadona\obj\Debug\dbCadona.csproj.CoreCompileInputs.cache
+C:\dev\cadodeus\dbcadona\dbCadona\obj\Debug\dbCadona.exe
+C:\dev\cadodeus\dbcadona\dbCadona\obj\Debug\dbCadona.pdb
