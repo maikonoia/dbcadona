@@ -20,3 +20,4 @@ C:\dev\cadodeus\dbcadona\dbCadona\obj\Debug\dbCadona.csproj.CoreCompileInputs.ca
 C:\dev\cadodeus\dbcadona\dbCadona\obj\Debug\dbCadona.exe
 C:\dev\cadodeus\dbcadona\dbCadona\obj\Debug\dbCadona.pdb
 C:\Users\Navalha\source\repos\dbCadona\dbCadona\obj\Debug\dbCadona.Form2.resources
+C:\Users\Navalha\source\repos\dbCadona\dbCadona\obj\Debug\dbCadona.Form3.resources

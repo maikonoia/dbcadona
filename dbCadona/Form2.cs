@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,18 +8,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
 
 namespace dbCadona
 {
     public partial class Form2 : Form
     {
         string op;
+        string dbFile;
         int contTransactions = 0;
-
 
         public Form2(int contTransactions)
         {
+            this.dbFile = "C:/dev/dbCadona.txt";
             this.contTransactions = contTransactions;
             this.ControlBox = false;
 
@@ -29,7 +30,7 @@ namespace dbCadona
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            var lines = System.IO.File.ReadAllLines(@"C:\dev\teste.txt");
+            var lines = File.ReadAllLines(@dbFile);
 
             foreach (var item in lines)
             {
@@ -39,7 +40,7 @@ namespace dbCadona
 
             lblTransactions.Text += contTransactions.ToString();
 
-            File.AppendAllText(string.Format(@"C:\dev\transacao{0}.txt", contTransactions), "---- # TRANSAÇÃO " + contTransactions + " # ----\r\n");
+            File.AppendAllText(string.Format(@"C:\dev\transacoes\transacao{0}.txt", contTransactions), "START|TRANSACAO" + contTransactions + "\r\n");
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -79,7 +80,7 @@ namespace dbCadona
                 return;
             }
 
-            var lines = System.IO.File.ReadAllLines(@"C:\dev\teste.txt");
+            var lines = File.ReadAllLines(@dbFile);
 
             if (op == "INSERIR")
             {
@@ -103,7 +104,7 @@ namespace dbCadona
                     }
                 }
 
-                File.AppendAllText(string.Format(@"C:\dev\transacao{0}.txt", contTransactions), op + "|" + txtCod.Text + "|" + txtName.Text + ";\r\n");
+                File.AppendAllText(string.Format(@"C:\dev\transacoes\transacao{0}.txt", contTransactions), op + "|" + txtCod.Text + "|" + txtName.Text + ";\r\n");
             }
 
             if (op == "ALTERAR")
@@ -128,7 +129,7 @@ namespace dbCadona
                     }
                 }
 
-                File.AppendAllText(string.Format(@"C:\dev\transacao{0}.txt", contTransactions), op + "|" + dataGridView1.SelectedCells[0].Value.ToString() + "|" + txtCod.Text + "|" + txtName.Text + ";\r\n");
+                File.AppendAllText(string.Format(@"C:\dev\transacoes\transacao{0}.txt", contTransactions), op + "|" + dataGridView1.SelectedCells[0].Value.ToString() + "|" + txtCod.Text + "|" + txtName.Text + ";\r\n");
             }
 
             dataGridView2.Rows.Add(op, txtCod.Text, txtName.Text);
@@ -144,7 +145,7 @@ namespace dbCadona
                 return;
             }
 
-            File.AppendAllText(string.Format(@"C:\dev\transacao{0}.txt", contTransactions), "REMOVER|" + txtCod.Text + "|" + txtName.Text + ";\r\n");
+            File.AppendAllText(string.Format(@"C:\dev\transacoes\transacao{0}.txt", contTransactions), "REMOVER|" + txtCod.Text + "|" + txtName.Text + ";\r\n");
             dataGridView2.Rows.Add("REMOVER", txtCod.Text, dataGridView1.SelectedCells[0].Value.ToString());
 
             DisplayAlert("Operação REMOVER efetuada.");
@@ -182,13 +183,15 @@ namespace dbCadona
 
         private void btnCommit_Click(object sender, EventArgs e)
         {
-            File.AppendAllText(string.Format(@"C:\dev\transacao{0}.txt", contTransactions), "---- # TRANSAÇÃO " + contTransactions + " |COMMIT| # ----");
+            File.AppendAllText(string.Format(@"C:\dev\transacoes\transacao{0}.txt", contTransactions), "END|TRANSACAO" + contTransactions + "|COMMIT");
             this.Close();
         }
 
         private void btnRollback_Click(object sender, EventArgs e)
         {
-            File.AppendAllText(string.Format(@"C:\dev\transacao{0}.txt", contTransactions), "---- # TRANSAÇÃO " + contTransactions + " |ROLLBACK| # ----");
+            new DbLog("TESTE");
+
+            File.AppendAllText(string.Format(@"C:\dev\transacoes\transacao{0}.txt", contTransactions), "END|TRANSACAO" + contTransactions + "|ROLLBACK");
             this.Close();
         }
     }

@@ -33,9 +33,6 @@
             this.Código = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.operacao = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnInserir = new System.Windows.Forms.Button();
             this.btnActions = new System.Windows.Forms.Button();
             this.btnDeletar = new System.Windows.Forms.Button();
@@ -50,6 +47,9 @@
             this.lblAlert = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
+            this.operacao = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.panel1.SuspendLayout();
@@ -103,6 +103,7 @@
             // 
             this.dataGridView2.AllowUserToAddRows = false;
             this.dataGridView2.AllowUserToDeleteRows = false;
+            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.operacao,
@@ -115,26 +116,6 @@
             this.dataGridView2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridView2.Size = new System.Drawing.Size(344, 173);
             this.dataGridView2.TabIndex = 7;
-            // 
-            // operacao
-            // 
-            this.operacao.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.operacao.HeaderText = "Operação";
-            this.operacao.Name = "operacao";
-            this.operacao.ReadOnly = true;
-            this.operacao.Width = 79;
-            // 
-            // codigo
-            // 
-            this.codigo.HeaderText = "Código";
-            this.codigo.Name = "codigo";
-            this.codigo.ReadOnly = true;
-            // 
-            // name
-            // 
-            this.name.HeaderText = "Nome";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
             // 
             // btnInserir
             // 
@@ -276,6 +257,24 @@
             this.label3.Text = "OBS:\r\nPara alterar e/ou editar um item dê 2 cliques na lista.\r\nPressione COMMIT o" +
     "u ROLLBACK para finalizar a transação.";
             // 
+            // operacao
+            // 
+            this.operacao.HeaderText = "Operação";
+            this.operacao.Name = "operacao";
+            this.operacao.ReadOnly = true;
+            // 
+            // codigo
+            // 
+            this.codigo.HeaderText = "Código";
+            this.codigo.Name = "codigo";
+            this.codigo.ReadOnly = true;
+            // 
+            // name
+            // 
+            this.name.HeaderText = "Nome";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -329,9 +328,9 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label lblAlert;
+        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridViewTextBoxColumn operacao;
         private System.Windows.Forms.DataGridViewTextBoxColumn codigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
-        private System.Windows.Forms.Label label3;
     }
 }
