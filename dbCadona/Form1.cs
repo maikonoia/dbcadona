@@ -20,61 +20,22 @@ namespace dbCadona
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            contTransactions++;
-            Form2 newForm = new Form2(contTransactions);
-            newForm.Show();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             var lines = System.IO.File.ReadAllLines(@"C:\dev\teste.txt");
 
             foreach (var item in lines)
             {
-                dataGridView1.Rows.Add(item.Substring(0, 1), item.Substring(3).Replace(";", ""));
+                var line = item.Split('|').ToList();
+                dataGridView1.Rows.Add(line[0], line[1].Replace(";", ""));
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void button2_Click_1(object sender, EventArgs e)
-        {
- 
-        }
-
-        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-        //    contTransactions++;
-        //    BdModel newObject = new BdModel();
-        //    //newObject.idPatrimony = dataGridView1.SelectedCells[0].Value.ToString();
-        //    //newObject.namePatrimony = dataGridView1.SelectedCells[1].Value.ToString();
-        //    Form2 newForm = new Form2(contTransactions);
-        //    newForm.Show();
+            contTransactions++;
+            Form2 newForm = new Form2(contTransactions);
+            newForm.Show();
         }
     }
 }

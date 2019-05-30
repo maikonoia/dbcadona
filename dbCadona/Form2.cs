@@ -13,7 +13,6 @@ namespace dbCadona
 {
     public partial class Form2 : Form
     {
-        string title;
         string op;
         int contTransactions = 0;
 
@@ -22,17 +21,6 @@ namespace dbCadona
         {
             this.contTransactions = contTransactions;
             this.ControlBox = false;
-
-            //if (crudMode == "INSERT" )
-            //{
-            //    BdModel newObject = new BdModel();
-            //    title = "INSERIR";
-            //    this.contTransactions  = contTransactions;
-            //} else if(crudMode == "UPDATE")
-            //{
-            //    title = "ATUALIZAR";
-            //    this.contTransactions = contTransactions;
-            //}
 
             InitializeComponent();
 
@@ -45,10 +33,13 @@ namespace dbCadona
 
             foreach (var item in lines)
             {
-                dataGridView1.Rows.Add(item.Substring(0, 1), item.Substring(3).Replace(";", ""));
+                var line = item.Split('|').ToList();
+                dataGridView1.Rows.Add(line[0], line[1].Replace(";", ""));
             }
 
             lblTransactions.Text += contTransactions.ToString();
+
+            File.AppendAllText(string.Format(@"C:\dev\transacao{0}.txt", contTransactions), "---- # TRANSAÇÃO " + contTransactions + " # ----\r\n");
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -88,30 +79,59 @@ namespace dbCadona
                 return;
             }
 
-            if (op == "ALTERAR")
-            {
-                var lines = System.IO.File.ReadAllLines(@"C:\dev\teste.txt");
+            var lines = System.IO.File.ReadAllLines(@"C:\dev\teste.txt");
 
-                for(int i = 0; i < lines.Length; i++)
+            if (op == "INSERIR")
+            {
+                foreach (var item in lines)
                 {
-                    if (lines[i].Substring(0, 1) == dataGridView1.SelectedCells[0].Value.ToString())
+                    var line = item.Split('|').ToList();
+                    if (txtCod.Text == line[0])
                     {
-                        lines[i] = txtCod.Text + "-" + txtName.Text + "-" + op;
+                        MessageBox.Show("O Código inserido já existe, utilize outro.");
+                        return;
                     }
                 }
 
-                //foreach (string item in lines)
-                //{
-                //    if(item.Substring(0, 1) == txtCod.Text)
-                //    {
-                //        item = txtCod.Text + "-" + txtName.Text + "-" + op;
-                //    }
-                //}
+                foreach (DataGridViewRow dataGridViewRow in dataGridView2.Rows)
+                {
+                    var item = Convert.ToString(dataGridViewRow.Cells["codigo"].Value);
+                    if (txtCod.Text == item)
+                    {
+                        MessageBox.Show("O Código já foi inserido, utilize outro.");
+                        return;
+                    }
+                }
+
+                File.AppendAllText(string.Format(@"C:\dev\transacao{0}.txt", contTransactions), op + "|" + txtCod.Text + "|" + txtName.Text + ";\r\n");
+            }
+
+            if (op == "ALTERAR")
+            {
+                foreach (var item in lines)
+                {
+                    var line = item.Split('|').ToList();
+                    if (txtCod.Text != dataGridView1.SelectedCells[0].Value.ToString() && txtCod.Text == line[0])
+                    {
+                        MessageBox.Show("O Código inserido já existe, utilize outro.");
+                        return;
+                    }
+                }
+
+                foreach (DataGridViewRow dataGridViewRow in dataGridView2.Rows)
+                {
+                    var item = Convert.ToString(dataGridViewRow.Cells["codigo"].Value);
+                    if (txtCod.Text == item)
+                    {
+                        MessageBox.Show("O Código já foi inserido, utilize outro.");
+                        return;
+                    }
+                }
+
+                File.AppendAllText(string.Format(@"C:\dev\transacao{0}.txt", contTransactions), op + "|" + dataGridView1.SelectedCells[0].Value.ToString() + "|" + txtCod.Text + "|" + txtName.Text + ";\r\n");
             }
 
             dataGridView2.Rows.Add(op, txtCod.Text, txtName.Text);
-
-            File.AppendAllText(string.Format(@"C:\dev\transacao{0}.txt", contTransactions), txtCod.Text + "-" + txtName.Text + "-" +  op +  ";\r\n");
 
             DisplayAlert(string.Format("Operação {0} efetuada.", op));
         }
@@ -124,7 +144,7 @@ namespace dbCadona
                 return;
             }
 
-            File.AppendAllText(string.Format(@"C:\dev\transacao{0}.txt", contTransactions), txtCod.Text + "-" + txtName.Text + "-" + op + ";\r\n");
+            File.AppendAllText(string.Format(@"C:\dev\transacao{0}.txt", contTransactions), "REMOVER|" + txtCod.Text + "|" + txtName.Text + ";\r\n");
             dataGridView2.Rows.Add("REMOVER", txtCod.Text, dataGridView1.SelectedCells[0].Value.ToString());
 
             DisplayAlert("Operação REMOVER efetuada.");
@@ -162,11 +182,13 @@ namespace dbCadona
 
         private void btnCommit_Click(object sender, EventArgs e)
         {
+            File.AppendAllText(string.Format(@"C:\dev\transacao{0}.txt", contTransactions), "---- # TRANSAÇÃO " + contTransactions + " |COMMIT| # ----");
             this.Close();
         }
 
         private void btnRollback_Click(object sender, EventArgs e)
         {
+            File.AppendAllText(string.Format(@"C:\dev\transacao{0}.txt", contTransactions), "---- # TRANSAÇÃO " + contTransactions + " |ROLLBACK| # ----");
             this.Close();
         }
     }
