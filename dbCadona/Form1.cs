@@ -16,17 +16,19 @@ namespace dbCadona
     {
         int contTransactions = 0;
         string dbFile;
+        string dbTemp;
 
         public Form1()
         {
             this.dbFile = "C:/dev/dbCadona.txt";
+            this.dbTemp = "C:/dev/dbCadonaTemp.txt";
 
             InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            var lines = File.ReadAllLines(@dbFile);
+            string[] lines = File.ReadAllLines(@dbFile);
 
             foreach (var item in lines)
             {
@@ -58,7 +60,7 @@ namespace dbCadona
 
         public static void processBreakFile(string path)
         {
-            var lines = File.ReadAllLines(@path);
+            string[] lines = File.ReadAllLines(@path);
 
             var firstLine = lines.First().Split('|').ToList();
             var lastLine = lines.Last().Split('|').ToList();
@@ -72,7 +74,7 @@ namespace dbCadona
         
         public static void processFile(string path)
         {
-            var lines = File.ReadAllLines(@path);
+            string[] lines = File.ReadAllLines(@path);
 
             var firstLine = lines.First().Split('|').ToList();
             var lastLine = lines.Last().Split('|').ToList();
@@ -81,7 +83,6 @@ namespace dbCadona
             {
                 if (lastLine[2] == "COMMIT")
                 {
-                    
                     return;
                 }
                 else
