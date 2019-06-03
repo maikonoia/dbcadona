@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace dbCadona
 {
@@ -62,6 +63,63 @@ namespace dbCadona
 
         private void button2_Click(object sender, EventArgs e)
         {
+            processFile(filePath);
+            this.Close();
+        }
+
+        public static void processFile(string path)
+        {
+            string[] lines = File.ReadAllLines(@path);
+
+            var lista = lines.ToList();
+
+            File.Copy("C:/dev/dbCadona.txt", "C:/dev/dbCadonaTemp.txt", true);
+
+            foreach (var item in lista)
+            {
+                var list = item.Split('|');
+                if (list[0] == "INSERIR")
+                {
+                    string toDbFile = string.Format("{0}|{1}\r\n", list[1], list[2]);
+                    File.AppendAllText("C:/dev/dbCadonaTemp.txt", toDbFile);
+                }
+                if (list[0] == "ALTERAR")
+                {
+                    string[] dbFile = File.ReadAllLines("C:/dev/dbCadonaTemp.txt");
+                    for (int i = 0; i < dbFile.Length; i++)
+                    {
+                        var lineFiles = dbFile[i].Split('|');
+                        if (lineFiles[0] == list[1])
+                        {
+                            dbFile[i] = string.Format(list[2] + "|" + list[3]);
+                            File.WriteAllLines("C:/dev/dbCadonaTemp.txt", dbFile);
+                        }
+                    }
+
+                }
+                if (list[0] == "REMOVER")
+                {
+                    string[] dbFile = File.ReadAllLines("C:/dev/dbCadonaTemp.txt");
+                    for (int i = 0; i < dbFile.Length; i++)
+                    {
+                        var lineFiles = dbFile[i].Split('|');
+                        if (lineFiles[0] == list[1])
+                        {
+                            dbFile[i] = null;
+                            File.WriteAllLines("C:/dev/dbCadonaTemp.txt", dbFile);
+                        }
+                    }
+                }
+            }
+
+            File.Delete(path);
+
+            string file = File.ReadAllText("C:/dev/dbCadonaTemp.txt");
+            var resultString = Regex.Replace(file, @"^\s+$[\r\n]*", string.Empty, RegexOptions.Multiline);
+            File.WriteAllText("C:/dev/dbCadonaTemp.txt", resultString);
+            File.Copy("C:/dev/dbCadonaTemp.txt", "C:/dev/dbCadona.txt", true);
+
+            File.Delete("C:/dev/dbCadonaTemp.txt");
 
         }
     }

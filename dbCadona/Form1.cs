@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Collections;
+using System.Text.RegularExpressions;
 
 namespace dbCadona
 {
@@ -25,6 +26,11 @@ namespace dbCadona
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            string[] fileEntries = Directory.GetFiles(@"C:\dev\transacoes");
+
+            foreach (string fileName in fileEntries)
+                processBreakFile(fileName);
+
             string[] lines = File.ReadAllLines(@dbFile);
 
             foreach (var item in lines)
@@ -32,11 +38,6 @@ namespace dbCadona
                 var line = item.Split('|').ToList();
                 dataGridView1.Rows.Add(line[0], line[1].Replace(";", ""));
             }
-
-            string[] fileEntries = Directory.GetFiles(@"C:\dev\transacoes");
-
-            foreach (string fileName in fileEntries)
-                processBreakFile(fileName);
         }
 
         private void btnNewTransaction_Click(object sender, EventArgs e)
@@ -53,6 +54,19 @@ namespace dbCadona
 
             foreach (string fileName in fileEntries)
                 processFile(fileName);
+
+            dataGridView1.Rows.Clear();
+
+            string[] lines = File.ReadAllLines(@dbFile);
+
+            foreach (var item in lines)
+            {
+                var line = item.Split('|').ToList();
+                dataGridView1.Rows.Add(line[0], line[1].Replace(";", ""));
+            }
+
+            dataGridView1.Refresh();
+
         }
 
         public static void processBreakFile(string path)
@@ -78,7 +92,8 @@ namespace dbCadona
             var lista = lines.ToList();
             lista.RemoveAt(0);
             lista.RemoveAt(lista.Count - 1);
- 
+
+            File.Copy("C:/dev/dbCadona.txt", "C:/dev/dbCadonaTemp.txt", true);
 
             if (firstLine[0] == "START" && lastLine[0] == "END")
             {
@@ -90,36 +105,50 @@ namespace dbCadona
                         if (list[0] == "INSERIR")
                         {
                             string toDbFile = string.Format("{0}|{1}\r\n", list[1], list[2]);
-                            File.AppendAllText("C:/dev/dbCadona.txt", toDbFile);
-                            //Form1 frmzinho = new Form1();
-                            //frmzinho.dataGridView1.Rows.Add(list[1], list[2]);
-                            //frmzinho.dataGridView1.Refresh();
-                            //frmzinho.Refresh();
+                            File.AppendAllText("C:/dev/dbCadonaTemp.txt", toDbFile);
+                        }
+                        if (list[0] == "ALTERAR")
+                        {
+                            string[] dbFile = File.ReadAllLines("C:/dev/dbCadonaTemp.txt");
+                            for (int i = 0; i < dbFile.Length; i++)
+                            {
+                                var lineFiles = dbFile[i].Split('|');
+                                if (lineFiles[0] == list[1])
+                                {
+                                    dbFile[i] = string.Format(list[2] + "|" + list[3]);
+                                    File.WriteAllLines("C:/dev/dbCadonaTemp.txt", dbFile);
+                                }
+                            }
+
                         }
                         if (list[0] == "REMOVER")
                         {
-                            string[] dbFile = File.ReadAllLines("C:/dev/dbCadona.txt");
-                            for(int i = 0; i<dbFile.Length; i++)
+                            string[] dbFile = File.ReadAllLines("C:/dev/dbCadonaTemp.txt");
+                            for (int i = 0; i < dbFile.Length; i++)
                             {
                                 var lineFiles = dbFile[i].Split('|');
-                                if(lineFiles[0] == list[1])
+                                if (lineFiles[0] == list[1])
                                 {
-                                    //limpar linha do array aqui
-                                    foreach (var toAppend in dbFile)
-                                    {
-                                        File.AppendAllText("C:/dev/dbCadona.txt", toAppend + "\r\t");
-                                    }
-                                    
+                                    dbFile[i] = null;
+                                    File.WriteAllLines("C:/dev/dbCadonaTemp.txt", dbFile);
                                 }
                             }
                         }
                     }
+                    File.Delete(path);
                 }
                 else
                 {
                     File.Delete(path);
                     return;
                 }
+
+                string file = File.ReadAllText("C:/dev/dbCadonaTemp.txt");
+                var resultString = Regex.Replace(file, @"^\s+$[\r\n]*", string.Empty, RegexOptions.Multiline);
+                File.WriteAllText("C:/dev/dbCadonaTemp.txt", resultString);
+                File.Copy("C:/dev/dbCadonaTemp.txt", "C:/dev/dbCadona.txt", true);
+
+                File.Delete("C:/dev/dbCadonaTemp.txt");
             }
 
             return;
