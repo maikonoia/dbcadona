@@ -149,6 +149,16 @@ namespace dbCadona
                 return;
             }
 
+            foreach (DataGridViewRow dataGridViewRow in dataGridView2.Rows)
+            {
+                var item = Convert.ToString(dataGridViewRow.Cells["codigo"].Value);
+                if (txtCod.Text == item)
+                {
+                    MessageBox.Show("Este Código já foi removido.");
+                    return;
+                }
+            }
+
             new DbLog("TRANSACAO " + contTransactions + " REMOVER CÓD " + dataGridView1.SelectedCells[0].Value.ToString());
 
             File.AppendAllText(string.Format(@"C:\dev\transacoes\transacao{0}.txt", contTransactions), "REMOVER|" + txtCod.Text + "|" + txtName.Text + ";\r\n");
