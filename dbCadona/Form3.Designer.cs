@@ -37,7 +37,7 @@
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblTransactions = new System.Windows.Forms.Label();
             this.btnUndo = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnRedo = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
@@ -129,22 +129,22 @@
             this.btnUndo.UseVisualStyleBackColor = true;
             this.btnUndo.Click += new System.EventHandler(this.btnUndo_Click);
             // 
-            // button2
+            // btnRedo
             // 
-            this.button2.Location = new System.Drawing.Point(340, 258);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(151, 43);
-            this.button2.TabIndex = 11;
-            this.button2.Text = "REFAZER (REDO)";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnRedo.Location = new System.Drawing.Point(340, 258);
+            this.btnRedo.Name = "btnRedo";
+            this.btnRedo.Size = new System.Drawing.Size(151, 43);
+            this.btnRedo.TabIndex = 11;
+            this.btnRedo.Text = "REFAZER (REDO)";
+            this.btnRedo.UseVisualStyleBackColor = true;
+            this.btnRedo.Click += new System.EventHandler(this.btnRedo_Click);
             // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(678, 313);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnRedo);
             this.Controls.Add(this.btnUndo);
             this.Controls.Add(this.lblTransactions);
             this.Controls.Add(this.dataGridView2);
@@ -172,6 +172,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.Label lblTransactions;
         private System.Windows.Forms.Button btnUndo;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnRedo;
     }
 }

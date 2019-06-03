@@ -16,11 +16,14 @@ namespace dbCadona
     public partial class Form1 : Form
     {
         int contTransactions = 0;
-        string  dbFile = "C:/dev/dbCadona.txt";
-        string dbTemp = "C:/dev/dbCadonaTemp.txt";
+        string dbFile;
+        string dbFileTemp;
 
         public Form1()
         {
+            this.dbFile = "C:/dev/dbCadona.txt";
+            this.dbFileTemp = "C:/dev/dbCadonaTemp.txt";
+
             InitializeComponent();
         }
 
@@ -83,7 +86,7 @@ namespace dbCadona
             }
         }
         
-        public static void processFile(string path)
+        public void processFile(string path)
         {
             string[] lines = File.ReadAllLines(@path);
 
@@ -93,7 +96,7 @@ namespace dbCadona
             lista.RemoveAt(0);
             lista.RemoveAt(lista.Count - 1);
 
-            File.Copy("C:/dev/dbCadona.txt", "C:/dev/dbCadonaTemp.txt", true);
+            File.Copy(dbFile, dbFileTemp, true);
 
             if (firstLine[0] == "START" && lastLine[0] == "END")
             {
@@ -105,32 +108,32 @@ namespace dbCadona
                         if (list[0] == "INSERIR")
                         {
                             string toDbFile = string.Format("{0}|{1}\r\n", list[1], list[2]);
-                            File.AppendAllText("C:/dev/dbCadonaTemp.txt", toDbFile);
+                            File.AppendAllText(dbFileTemp, toDbFile);
                         }
                         if (list[0] == "ALTERAR")
                         {
-                            string[] dbFile = File.ReadAllLines("C:/dev/dbCadonaTemp.txt");
+                            string[] dbFile = File.ReadAllLines(dbFileTemp);
                             for (int i = 0; i < dbFile.Length; i++)
                             {
                                 var lineFiles = dbFile[i].Split('|');
                                 if (lineFiles[0] == list[1])
                                 {
                                     dbFile[i] = string.Format(list[2] + "|" + list[3]);
-                                    File.WriteAllLines("C:/dev/dbCadonaTemp.txt", dbFile);
+                                    File.WriteAllLines(dbFileTemp, dbFile);
                                 }
                             }
 
                         }
                         if (list[0] == "REMOVER")
                         {
-                            string[] dbFile = File.ReadAllLines("C:/dev/dbCadonaTemp.txt");
+                            string[] dbFile = File.ReadAllLines(dbFileTemp);
                             for (int i = 0; i < dbFile.Length; i++)
                             {
                                 var lineFiles = dbFile[i].Split('|');
                                 if (lineFiles[0] == list[1])
                                 {
                                     dbFile[i] = null;
-                                    File.WriteAllLines("C:/dev/dbCadonaTemp.txt", dbFile);
+                                    File.WriteAllLines(dbFileTemp, dbFile);
                                 }
                             }
                         }
@@ -143,12 +146,12 @@ namespace dbCadona
                     return;
                 }
 
-                string file = File.ReadAllText("C:/dev/dbCadonaTemp.txt");
+                string file = File.ReadAllText(dbFileTemp);
                 var resultString = Regex.Replace(file, @"^\s+$[\r\n]*", string.Empty, RegexOptions.Multiline);
-                File.WriteAllText("C:/dev/dbCadonaTemp.txt", resultString);
-                File.Copy("C:/dev/dbCadonaTemp.txt", "C:/dev/dbCadona.txt", true);
+                File.WriteAllText(dbFileTemp, resultString);
+                File.Copy(dbFileTemp, dbFile, true);
 
-                File.Delete("C:/dev/dbCadonaTemp.txt");
+                File.Delete(dbFileTemp);
             }
 
             return;
