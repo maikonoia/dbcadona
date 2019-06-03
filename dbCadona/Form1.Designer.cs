@@ -32,8 +32,8 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Código = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnNewTransaction = new System.Windows.Forms.Button();
             this.btnCheckpoint = new System.Windows.Forms.Button();
+            this.btnNewTransaction = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,16 +68,6 @@
             this.Nome.Name = "Nome";
             this.Nome.ReadOnly = true;
             // 
-            // btnNewTransaction
-            // 
-            this.btnNewTransaction.Location = new System.Drawing.Point(12, 263);
-            this.btnNewTransaction.Name = "btnNewTransaction";
-            this.btnNewTransaction.Size = new System.Drawing.Size(196, 48);
-            this.btnNewTransaction.TabIndex = 1;
-            this.btnNewTransaction.Text = "Nova Transacao";
-            this.btnNewTransaction.UseVisualStyleBackColor = true;
-            this.btnNewTransaction.Click += new System.EventHandler(this.btnNewTransaction_Click);
-            // 
             // btnCheckpoint
             // 
             this.btnCheckpoint.Location = new System.Drawing.Point(214, 263);
@@ -87,6 +77,16 @@
             this.btnCheckpoint.Text = "CHECKPOINT";
             this.btnCheckpoint.UseVisualStyleBackColor = true;
             this.btnCheckpoint.Click += new System.EventHandler(this.btnCheckpoint_Click);
+            // 
+            // btnNewTransaction
+            // 
+            this.btnNewTransaction.Location = new System.Drawing.Point(12, 263);
+            this.btnNewTransaction.Name = "btnNewTransaction";
+            this.btnNewTransaction.Size = new System.Drawing.Size(196, 48);
+            this.btnNewTransaction.TabIndex = 1;
+            this.btnNewTransaction.Text = "Nova Transacao";
+            this.btnNewTransaction.UseVisualStyleBackColor = true;
+            this.btnNewTransaction.Click += new System.EventHandler(this.btnNewTransaction_Click);
             // 
             // Form1
             // 
@@ -111,10 +111,10 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button btnNewTransaction;
         private System.Windows.Forms.Button btnCheckpoint;
         private System.Windows.Forms.DataGridViewTextBoxColumn Código;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nome;
+        private System.Windows.Forms.Button btnNewTransaction;
     }
 }
 

@@ -143,7 +143,6 @@ namespace dbCadona
                 else
                 {
                     File.Delete(path);
-                    return;
                 }
 
                 string file = File.ReadAllText(dbFileTemp);
