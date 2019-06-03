@@ -59,5 +59,10 @@ namespace dbCadona
             File.Delete(filePath);
             this.Close();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

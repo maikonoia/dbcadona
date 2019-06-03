@@ -15,14 +15,11 @@ namespace dbCadona
     public partial class Form1 : Form
     {
         int contTransactions = 0;
-        string dbFile;
-        string dbTemp;
+        string  dbFile = "C:/dev/dbCadona.txt";
+        string dbTemp = "C:/dev/dbCadonaTemp.txt";
 
         public Form1()
         {
-            this.dbFile = "C:/dev/dbCadona.txt";
-            this.dbTemp = "C:/dev/dbCadonaTemp.txt";
-
             InitializeComponent();
         }
 
@@ -78,12 +75,45 @@ namespace dbCadona
 
             var firstLine = lines.First().Split('|').ToList();
             var lastLine = lines.Last().Split('|').ToList();
+            var lista = lines.ToList();
+            lista.RemoveAt(0);
+            lista.RemoveAt(lista.Count - 1);
+ 
 
             if (firstLine[0] == "START" && lastLine[0] == "END")
             {
                 if (lastLine[2] == "COMMIT")
                 {
-                    return;
+                    foreach (var item in lista)
+                    {
+                        var list = item.Split('|');
+                        if (list[0] == "INSERIR")
+                        {
+                            string toDbFile = string.Format("{0}|{1}\r\n", list[1], list[2]);
+                            File.AppendAllText("C:/dev/dbCadona.txt", toDbFile);
+                            //Form1 frmzinho = new Form1();
+                            //frmzinho.dataGridView1.Rows.Add(list[1], list[2]);
+                            //frmzinho.dataGridView1.Refresh();
+                            //frmzinho.Refresh();
+                        }
+                        if (list[0] == "REMOVER")
+                        {
+                            string[] dbFile = File.ReadAllLines("C:/dev/dbCadona.txt");
+                            for(int i = 0; i<dbFile.Length; i++)
+                            {
+                                var lineFiles = dbFile[i].Split('|');
+                                if(lineFiles[0] == list[1])
+                                {
+                                    //limpar linha do array aqui
+                                    foreach (var toAppend in dbFile)
+                                    {
+                                        File.AppendAllText("C:/dev/dbCadona.txt", toAppend + "\r\t");
+                                    }
+                                    
+                                }
+                            }
+                        }
+                    }
                 }
                 else
                 {
