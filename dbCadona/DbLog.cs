@@ -32,8 +32,8 @@ namespace dbCadona
                 txtWriter.Write("\r\nLog gerado : ");
                 txtWriter.WriteLine("{0} {1}", DateTime.Now.ToLongTimeString(),
                     DateTime.Now.ToLongDateString());
-                txtWriter.WriteLine("  :");
-                txtWriter.WriteLine("  :{0}", logMessage);
+                txtWriter.WriteLine("           :");
+                txtWriter.WriteLine("           :{0}", logMessage);
                 txtWriter.WriteLine("-------------------------------");
             }
             catch (Exception ex)

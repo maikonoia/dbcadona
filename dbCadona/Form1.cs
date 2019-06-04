@@ -138,10 +138,13 @@ namespace dbCadona
                             }
                         }
                     }
+
+                    new DbLog("REMOVIDO ARQUIVO " + path);
                     File.Delete(path);
                 }
                 else
                 {
+                    new DbLog("REMOVIDO ARQUIVO " + path);
                     File.Delete(path);
                 }
 
@@ -149,6 +152,8 @@ namespace dbCadona
                 var resultString = Regex.Replace(file, @"^\s+$[\r\n]*", string.Empty, RegexOptions.Multiline);
                 File.WriteAllText(dbFileTemp, resultString);
                 File.Copy(dbFileTemp, dbFile, true);
+
+                new DbLog("REMOVIDO ARQUIVO TEMPORARIO");
 
                 File.Delete(dbFileTemp);
             }

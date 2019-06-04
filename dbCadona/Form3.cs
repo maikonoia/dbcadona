@@ -58,7 +58,7 @@ namespace dbCadona
 
         private void btnUndo_Click(object sender, EventArgs e)
         {
-            new DbLog("ARQUIVO DE TRANSACAO " + dbFile + " DESFEITO(UNDO)");
+            new DbLog("ARQUIVO DE TRANSACAO " + filePath + " DESFEITO(UNDO)");
             File.Delete(filePath);
             this.Close();
         }
@@ -114,7 +114,7 @@ namespace dbCadona
                 }
             }
 
-            new DbLog("ARQUIVO DE TRANSACAO " + dbFile + " REFEITO(REDO)");
+            new DbLog("ARQUIVO DE TRANSACAO " + filePath + " REFEITO(REDO)");
 
             File.Delete(path);
 

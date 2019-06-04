@@ -33,6 +33,9 @@
             this.Código = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.operacao = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnInserir = new System.Windows.Forms.Button();
             this.btnActions = new System.Windows.Forms.Button();
             this.btnDeletar = new System.Windows.Forms.Button();
@@ -47,9 +50,6 @@
             this.lblAlert = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
-            this.operacao = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.panel1.SuspendLayout();
@@ -81,6 +81,7 @@
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(300, 173);
             this.dataGridView1.TabIndex = 6;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
@@ -116,6 +117,24 @@
             this.dataGridView2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridView2.Size = new System.Drawing.Size(344, 173);
             this.dataGridView2.TabIndex = 7;
+            // 
+            // operacao
+            // 
+            this.operacao.HeaderText = "Operação";
+            this.operacao.Name = "operacao";
+            this.operacao.ReadOnly = true;
+            // 
+            // codigo
+            // 
+            this.codigo.HeaderText = "Código";
+            this.codigo.Name = "codigo";
+            this.codigo.ReadOnly = true;
+            // 
+            // name
+            // 
+            this.name.HeaderText = "Nome";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
             // 
             // btnInserir
             // 
@@ -256,24 +275,6 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "OBS:\r\nPara alterar e/ou editar um item dê 2 cliques na lista.\r\nPressione COMMIT o" +
     "u ROLLBACK para finalizar a transação.";
-            // 
-            // operacao
-            // 
-            this.operacao.HeaderText = "Operação";
-            this.operacao.Name = "operacao";
-            this.operacao.ReadOnly = true;
-            // 
-            // codigo
-            // 
-            this.codigo.HeaderText = "Código";
-            this.codigo.Name = "codigo";
-            this.codigo.ReadOnly = true;
-            // 
-            // name
-            // 
-            this.name.HeaderText = "Nome";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
             // 
             // Form2
             // 
