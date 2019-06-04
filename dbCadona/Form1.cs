@@ -28,10 +28,10 @@ namespace dbCadona
             this.dbFile = "C:/dev/dbCadona.txt";
             this.dbFileTemp = "C:/dev/dbCadonaTemp.txt";
 
-            InitializeComponent();
-
             this.Load += new EventHandler(HandleFormLoad);
             this.splashScreen = new SplashScreen();
+
+            InitializeComponent();
         }
 
         private void HandleFormLoad(object sender, EventArgs e)
