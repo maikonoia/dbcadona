@@ -63,6 +63,15 @@ namespace dbCadona
                             list[i] = null;
                             File.WriteAllLines(dbFileBlock, list);
                             new DbLog("REMOVIDO BLOQUEIO DO CÓD " + dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString() + " pela Transação " + contTransactions);
+
+                            File.AppendAllText(dbFileBlock, dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString() + "|" + contTransactions.ToString() + "\r\n");
+                            new DbLog("ADICIONADO BLOQUEIO DO CÓD " + dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString() + " pela Transação " + contTransactions);
+                        }
+
+                        if (lineFiles[1] != contTransactions.ToString())
+                        {
+                            File.AppendAllText(dbFileBlock, dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString() + "|" + contTransactions.ToString() + "\r\n");
+                            new DbLog("ADICIONADO BLOQUEIO DO CÓD " + dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString() + " pela Transação " + contTransactions);
                         }
 
                         string file = File.ReadAllText(dbFileBlock);
@@ -70,7 +79,7 @@ namespace dbCadona
                         File.WriteAllText(dbFileBlock, resultString);
                     }
 
-                    if (lineFiles[0].Equals(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString()) && lineFiles[1] != contTransactions.ToString())
+                    if (lineFiles[0] == dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString() && lineFiles[1] != contTransactions.ToString())
                     {
                         MessageBox.Show("O item esta bloqueado pela Transação " + lineFiles[1] + "! Escolha outra ação!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
@@ -89,9 +98,12 @@ namespace dbCadona
                 txtCod.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
                 txtName.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
             }
+            else
+            {
+                File.AppendAllText(dbFileBlock, dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString() + "|" + contTransactions.ToString() + "\r\n");
+                new DbLog("ADICIONADO BLOQUEIO DO CÓD " + dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString() + " pela Transação " + contTransactions);
+            }
 
-            File.AppendAllText(dbFileBlock, dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString() + "|" + contTransactions.ToString() + "\r\n");
-            new DbLog("ADICIONADO BLOQUEIO DO CÓD " + dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString() + " pela Transação " + contTransactions);
         }
 
         private void btnInserir_Click(object sender, EventArgs e)
