@@ -10,11 +10,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Collections;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace dbCadona
 {
     public partial class Form1 : Form
     {
+        private SplashScreen splashScreen;
+        private bool done = false;
+
         int contTransactions = 0;
         string dbFile;
         string dbFileTemp;
@@ -25,6 +29,38 @@ namespace dbCadona
             this.dbFileTemp = "C:/dev/dbCadonaTemp.txt";
 
             InitializeComponent();
+
+            this.Load += new EventHandler(HandleFormLoad);
+            this.splashScreen = new SplashScreen();
+        }
+
+        private void HandleFormLoad(object sender, EventArgs e)
+        {
+            this.Hide();
+            Thread thread = new Thread(new ThreadStart(this.ShowSplashScreen));
+            thread.Start();
+            Hardworker worker = new Hardworker();
+            worker.ProgressChanged += (o, ex) =>
+            {
+                this.splashScreen.UpdateProgress(ex.Progress);
+            };
+            worker.HardWorkDone += (o, ex) =>
+            {
+                done = true;
+                this.Show();
+            };
+            worker.DoHardWork();
+        }
+
+        private void ShowSplashScreen()
+        {
+            splashScreen.Show();
+            while (!done)
+            {
+                Application.DoEvents();
+            }
+            splashScreen.Close();
+            this.splashScreen.Dispose();
         }
 
         private void Form1_Load(object sender, EventArgs e)
