@@ -15,6 +15,7 @@ namespace dbCadona
     {
         string op;
         string dbFile;
+        string dbFileBlock;
         int contTransactions = 0;
 
         public Form2(int contTransactions)
@@ -22,6 +23,7 @@ namespace dbCadona
             this.dbFile = "C:/dev/dbCadona.txt";
             this.contTransactions = contTransactions;
             this.ControlBox = false;
+            this.dbFileBlock = "C:/dev/dbCadonaBloqueios.txt";
 
             InitializeComponent();
 
@@ -45,17 +47,37 @@ namespace dbCadona
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            op = "ALTERAR";
-            txtCod.Visible = true;
-            txtName.Visible = true;
-            label1.Visible = true;
-            label2.Visible = true;
-            btnActions.Visible = true;
-            btnActions.Text = "Alterar";
-            btnDeletar.Visible = true;
-            
-            txtCod.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
-            txtName.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+            if(File.ReadAllLines(dbFileBlock).Any())
+            {
+                string[] list = File.ReadAllLines(dbFileBlock);
+                for(int i = 0; i > list.Length; i++)
+                {
+                    string[] array = list[i].Split('|');
+                    if (array[0] != dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString() && array[1] == contTransactions.ToString())
+                    {
+                        File.WriteAllLines(dbFileBlock, array[i] = null);
+                    }
+                    if(array[0].Equals(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString()) && array[1] != contTransactions.ToString())
+                    {
+                        MessageBox.Show("O Item esta bloqueado por outra transação!, Escolha outra ação!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+                op = "ALTERAR";
+                txtCod.Visible = true;
+                txtName.Visible = true;
+                label1.Visible = true;
+                label2.Visible = true;
+                btnActions.Visible = true;
+                btnActions.Text = "Alterar";
+                btnDeletar.Visible = true;
+
+                txtCod.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+                txtName.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+
+                File.AppendAllText(dbFileBlock, txtCod.Text + "|" + contTransactions.ToString() + "\r\n");
+                cont++;
+            }
         }
 
         private void btnInserir_Click(object sender, EventArgs e)
